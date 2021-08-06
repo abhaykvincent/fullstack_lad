@@ -249,3 +249,6 @@ app.get('/easy/search',(req,res) => {
     timeoutSeconds: 300,
     memory: '1GB'
   }
+
+  // Expose Express API as a single Cloud Function:
+  exports.api = functions.runWith(runtimeOpts).https.onRequest(app);
