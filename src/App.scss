@@ -1,0 +1,272 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.App{
+    font-family: 'Montserrat';
+    .header{
+        width: 100vw;
+        position: fixed;
+        top:0px;
+        padding: 1em;
+        background-color: #0e0e0ef6;
+        color: rgb(219, 219, 219);
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+    .lets-chat{
+        width: 100vw;
+        display: grid;
+        align-content: center;
+        .lets-chat-BOX{
+            position: fixed;
+            bottom: 1em;
+            width: 100vw;
+            z-index: 100;
+            .abhay-bot{
+                display: grid;
+                grid-template-rows: 3em auto;
+                height: 80vh;
+                width: 90vw;
+                margin: 0px auto;
+                background-color: rgb(240, 240, 240);
+                border: 1px solid rgb(31, 31, 31);
+                border-radius: 0.6em;
+                z-index: 80;
+                .bot-head{
+                    border-radius: 0.4em 0.4em 1px 1px;
+                    color: white;
+                    background-color: rgb(24, 24, 24);
+                    padding: 1em;
+                }
+                .bot-chat{
+                    display: grid;
+                    grid-template-rows: auto auto 2.4em;
+                    grid-row-gap: 1em;
+                    padding: 1em;
+                    .messages{
+                        display: grid;
+                        grid-row-gap: 0.6em;
+                        margin-bottom: 1em;
+                        align-content: start;
+                        .message{
+                            &.bot-message{
+                                display: grid;
+                                grid-template-columns: 2.5em auto 2em;
+                                align-content: start;
+                                grid-column-gap: 1em;
+                                .profile{
+                                    background-color: rgb(196, 196, 196);
+                                    border-radius: 50%;
+                                    width: 2.5em;
+                                    height: 2.5em;
+                                }
+                                .text-message{
+                                    border: 1px solid rgb(170, 170, 170);
+                                padding: 0.5em 1em;
+                                border-radius: 0.6em;
+                                background-color: rgb(255, 255, 255);
+                                }
+                            }
+                            &.user-message{
+
+                                display: grid;
+                                grid-template-columns: 2em auto  ;
+                                align-content: start;
+                                grid-column-gap: 1em;
+                                .text-message{
+                                    border: 1px solid rgb(170, 170, 170);
+                                padding: 0.5em 1em;
+                                border-radius: 0.6em;
+                                background-color: rgb(233, 224, 216);
+                                }
+                            }
+                        }
+                    }
+                    .options{
+                        display: grid;
+                        align-content: end;
+                        grid-row-gap: 0.6em;
+
+                        .option{
+                            padding: 0.4em 1.6em;
+                            color: white;
+                            background-color: orange;
+                            border-radius: 02em;
+                        }
+                    }
+                    .input-message{
+                        .user-message-input{
+                            width: 100%;
+                            height: 100%;
+                            border: 1px solid #a3a3a3f6;
+                            border-radius: 0.4em;
+                        }
+                    }
+                }
+
+            }
+        }
+        .lets-chat-button{
+            position: fixed;
+            padding: 1em;
+            right: 2em;
+            bottom: 2em;
+            background-image: url('./image/lets-chat.button.svg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        .screen-cover{
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0px;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 99;
+        }
+    }
+    .splash{
+        min-height: 90vh;
+        padding: 1em 3em;
+        padding-top: 7em;
+        background-color: rgb(29, 29, 29);
+        color: rgb(226, 226, 226);
+        &-image{
+            height: 25vh;
+            background-image: url('./image/splash-image-001a.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        &-title{
+            font-weight: bold;
+            font-size: 9vw;
+            margin: 5vh 0px;
+        }
+        &-buttons{
+            display: grid;
+            justify-content: center;
+            margin-top: 10vh;
+            .links-from-bio_button{
+                border: 1px solid orange;
+                border-radius: 20px;
+                padding: 0.5em 2em;
+            }
+            .splash-social{
+                display: grid;
+                grid-auto-flow: column;
+                justify-items: center;
+                margin-top: 5vh;
+                .social-icons{
+                    display: grid;
+                    justify-content: center;
+                    align-content: center;
+
+                    width: 2em;
+                    height: 2em;
+                    border-radius: 60%;
+                    background-color: white;
+                    color:black;
+                }
+            }
+        }
+    }
+    .post{
+        margin: 0px auto;
+        padding: 3em 2em;
+        max-width: 50em;
+        .post-header{
+            font-weight: 100;
+            color: rgba(0, 0, 0, 0.8);
+        }
+        .post-wrap{
+            padding: 3em 0px;
+        }
+        &.signal{
+            .post-signal{
+                &-title{
+                    font-size: 1.2em;
+                    font-weight: 400;
+                    text-align: center;
+                }
+                &-image{
+                    height: 5em;
+                    margin: 0px;
+                    background-image: url('./image/signal-logo-001.jpg');
+                    background-position: center;
+                    background-size: 80%;
+                    background-repeat: no-repeat;
+                }
+                &-context{
+                    margin: 5em 0px;
+                    font-weight: 300;
+                    text-align: center;
+                }
+                &-cta{
+                    display: grid;
+                    justify-content: center;
+                    .signal-me-label{
+                        display: grid;
+                        align-content: center;
+                        grid-template-columns: auto auto;
+                        grid-column-gap: 0.8em;
+                        font-weight: bold;
+                        font-size: 1.2em;
+                        .signal-logo-single{
+                            padding: 1em;
+                            background-image: url('./image/signal-logo_no-title.jpg');
+                            background-size: 100%;
+                            background-repeat: no-repeat;
+                        }
+                        .label-text{
+                            display: grid;
+                            align-content: center;
+                        }
+                    }
+                    .signal-me-number{
+                        font-size: 1.3em;
+                        font-weight: 400;
+                        margin-top: 0.2em;
+                        color: rgba(94, 94, 94, 0.699);
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+    .footer{
+        display: grid;
+        padding: 1em;
+        background-color: rgb(7, 7, 7);
+        color: rgb(219, 219, 219);
+        &-logo{
+            font-weight: bold;
+            padding: 1em 0px;
+            font-size: 1.2em;
+            text-align: left;
+            .footer-author-name{
+                font-weight: 300;
+                font-size: 0.8em;
+            }
+        }
+        &-contacts{
+            .socials{
+                margin:1em 0px;
+                .social{
+                    margin: 6px 0px;
+                }
+            }
+            .directs{
+                margin:1em 0px;
+                color: rgb(160, 160, 160);
+                .direct{
+                    margin: 6px 0px;
+                }
+            }
+        }
+        &-copyright{
+            margin-top: 2em;
+            text-align: center;
+        }
+    }
+}

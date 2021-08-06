@@ -1,0 +1,118 @@
+const fetch= require('node-fetch');
+const cheerio= require('cheerio');
+
+const searchUrl ='https://www.imdb.com/find?s=tt&ttype=ft&ref_=fn_ft&q=';
+const movieUrl ='https://www.imdb.com/title/';
+
+function searchMovies(searchterm) {
+    return fetch(`${searchUrl}${searchterm}`)
+        .then(responce => responce.text())
+        .then(body => {
+            const $ = cheerio.load(body);
+            const movies=[];
+            $(".findResult").each((i,element)=>{
+                const $element = $(element);
+    
+                const name = $element.find('td a ').text();
+                const imageArray = $element.find('td a img').attr('src').match(/(.*)@(.*)/);
+                let image=imageArray;
+                if(imageArray){
+                    image= imageArray[1]+"@"
+                }
+                
+                
+                const imdbId = $element.find('td a').attr('href').match(/title\/(.*)\//)[1];
+                
+                const movie = {
+                    name,
+                    image,
+                    imdbId
+                }
+                movies.push(movie);
+            });
+            console.log(movies);
+            return movies
+        });
+}
+
+function  getMovie(imdbId){
+    return fetch(`${movieUrl}${imdbId}`)
+        .then(responce => responce.text())
+        .then(body =>  {
+            const $ = cheerio.load(body);
+
+            const title = $('.title_wrapper h1').first().contents().filter(function() {
+                return this.type === 'text';
+            }).text().trim();
+            const desc = $('.summary_text').text().trim();
+            //const director = $('.credit_summary_item a').first().text();
+            const genreList = $('.subtext a').toArray();
+            const genre =[];
+            $(genreList).each((i,element) => {
+                const $genre =  $(element);
+                genre.push($genre.text())
+            })
+            const imdbRating = $('.ratingValue').text().split('/')[0]
+            const releaseDate = genre.pop().trim()
+            //const releaseDate = genreList.pop().text();
+            const crew = [];
+            $('.credit_summary_item').each((i,element) => {
+                const $element = $(element);
+                crew.push($element)
+            });
+            const  director =  []
+            $(crew[0].find('a')).each((i,element) => {
+                $star= $(element);
+                const id =  $star.attr('href').match(/name\/(.*)\//);
+                const imdbId = id;
+                const star = {
+                    name : $star.text(),
+                    imdbId
+                }
+                director.push(star)
+            })
+            const  writer = []
+            $(crew[1].find('a')).each((i,element) => {
+                $star= $(element);
+                const id =  $star.attr('href').match(/name\/(.*)\//);
+                const imdbId = id;
+                const star = {
+                    name : $star.text(),
+                    imdbId
+                }
+                writer.push(star)
+            })
+            const  stars=[];
+            $(crew[2].find('a')).each((i,element) => {
+                $star= $(element);
+                const id =  $star.attr('href').match(/name\/(.*)\//);
+                const imdbId = id;
+                const star = {
+                    name : $star.text(),
+                    imdbId
+                }
+                stars.push(star)
+            })
+            stars.pop();
+            const year = $('#titleYear').text().match;
+            const poster = {
+                low  : $('.poster a img').attr('src'),
+                high: $('.poster a img').attr('src').match(/(.*)@(.*)/)[1] + "@"
+            }
+            
+            const movie ={
+                title,
+                desc,
+                genre,
+                imdbRating,
+                year,
+                releaseDate,
+                director,
+                writer,
+                stars,
+                poster
+            }
+            return movie
+        })
+}
+module.exports = {searchMovies,getMovie}
