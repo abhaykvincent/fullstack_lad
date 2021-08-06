@@ -222,3 +222,30 @@ app.get('/easy/getProductsByCategory/:category',(req,res) => {
 
 })
 
+app.get('/easy/search',(req,res) => {
+    db.collection("products-grocery")
+    .where('fieldName', '>=', 'tomato')
+    .limit(12)
+      .get()
+      .then(function(querySnapshot) {
+        let products=[];
+          querySnapshot.forEach(function(product) {
+            products.push(product.data())
+          });
+          return products
+      })
+      .then(products=>{
+  
+        res.json(products)
+      })
+      .catch(function(error) {
+          console.log("Error getting documents: ", error);
+      });
+  
+  })
+  
+  
+  const runtimeOpts = {
+    timeoutSeconds: 300,
+    memory: '1GB'
+  }
