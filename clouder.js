@@ -8,4 +8,3 @@ const { db } = require('./util/admin');
 
 const walmart = require('./walmart')
 
-s
